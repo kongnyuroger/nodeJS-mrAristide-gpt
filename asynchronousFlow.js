@@ -28,7 +28,10 @@ taskA(()=>{
     
 })*/
 
+
+
 // parallel with callback
+/*
 let count = 0;
 function checkDone(){
     count++
@@ -37,3 +40,31 @@ function checkDone(){
 
 taskA(checkDone)
 taskB(checkDone)
+*/
+
+//using async/await
+function taskAPromise(){
+    return new Promise((resolve) =>{
+        setTimeout(()=>{
+            console.log("A done")
+            resolve()
+        },1000)
+    }) ;
+}
+
+function taskBPromise(){
+    return new Promise((resolve) =>{
+        setTimeout(()=>{
+            console.log("B done")
+            resolve()
+        },1000)
+    }) ;
+}
+ //serial
+async function runSerial() {
+  await taskAPromise();
+  await taskBPromise();
+  console.log("All done (serial)");
+}
+
+runSerial();
